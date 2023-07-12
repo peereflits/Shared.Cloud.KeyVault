@@ -1,0 +1,53 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <AssemblyName>Peereflits.Shared.Cloud.KeyVault.Interfaces</AssemblyName>
+    <RootNamespace>Peereflits.Shared.Cloud.KeyVault</RootNamespace>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <ApplicationIcon>..\Solution Items\favicon.ico</ApplicationIcon>
+    <IsPackable>true</IsPackable>
+    <Nullable>enable</Nullable>
+    <OutputPath>bin\$(Configuration)\</OutputPath>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <Authors>Peereflits</Authors>
+    <Copyright>No Copyright ©, The Netherlands</Copyright>
+    <Description>Peereflits.Shared.Cloud.KeyVault.Interfaces is a type definition library for Peereflits.Shared.Cloud.KeyVault.</Description>
+    <Product>Peereflits.Shared.Cloud.KeyVault</Product>
+  </PropertyGroup>
+
+  <PropertyGroup Label="Package">
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <PackageIcon>PackageIcon.png</PackageIcon>
+    <PackageProjectUrl>https://github.com/peereflits/Shared.Cloud.KeyVault</PackageProjectUrl>
+    <RepositoryType>git</RepositoryType>
+    <RepositoryUrl>https://github.com/peereflits/Shared.Cloud.KeyVault</RepositoryUrl>
+    <Title>Peereflits.Shared.Cloud.KeyVault.Interfaces package</Title>
+    <PackageDescription>
+Peereflits.Shared.Cloud.KeyVault.Interfaces is a type definition library for Peereflits.Shared.Cloud.KeyVault.
+This is a component of Peereflits.Shared.
+    </PackageDescription>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugType>full</DebugType>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <WarningsAsErrors />
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Properties\" />
+    <Content Include="..\Solution Items\PackageIcon.png" Link="Properties\PackageIcon.png" Pack="true" PackagePath="\" />
+  </ItemGroup>
+
+</Project>
