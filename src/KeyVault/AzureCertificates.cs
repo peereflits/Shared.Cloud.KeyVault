@@ -3,6 +3,7 @@ using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using Azure;
+using Azure.Core;
 using Azure.Security.KeyVault.Certificates;
 using Microsoft.Extensions.Logging;
 
@@ -178,6 +179,14 @@ internal class AzureCertificates : ICertificates
                           ? new Uri(keyVaultName)
                           : new Uri($"https://{keyVaultName}.vault.azure.net");
 
-        return new CertificateClient(uri, new AzureCredentialBuilder().Build());
+        return new CertificateClient(uri, new AzureCredentialBuilder().Build(), new CertificateClientOptions
+                                                                                {
+                                                                                    Retry =
+                                                                                    {
+                                                                                        MaxRetries = 3,
+                                                                                        Mode = RetryMode.Exponential,
+                                                                                        MaxDelay = TimeSpan.FromSeconds(30)
+                                                                                    }
+                                                                                });
     }
 }

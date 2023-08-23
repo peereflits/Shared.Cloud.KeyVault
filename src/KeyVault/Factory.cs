@@ -38,7 +38,7 @@ public class Factory : IFactory
         return new Factory(keyVaultName, loggerFactory);
     }
 
-    public static ISecrets CreateSecretWithoutLogging(string keyVaultName) 
+    public static ISecrets CreateSecretsWithoutLogging(string keyVaultName) 
         => CreateFactory(keyVaultName, NullLoggerFactory.Instance).CreateSecrets();
 
     public static ICertificates CreateCertificatesWithoutLogging(string keyVaultName) 

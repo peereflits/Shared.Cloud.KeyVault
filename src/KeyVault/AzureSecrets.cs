@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Azure;
+using Azure.Core;
 using Azure.Security.KeyVault.Secrets;
 using Microsoft.Extensions.Logging;
 
@@ -8,8 +9,8 @@ namespace Peereflits.Shared.Cloud.KeyVault;
 
 internal class AzureSecrets : ISecrets
 {
-    private readonly SecretClient secretClient;
     private readonly ILogger<AzureSecrets> logger;
+    private readonly SecretClient secretClient;
 
     public AzureSecrets(string keyVaultName, ILogger<AzureSecrets> logger)
     {
@@ -23,7 +24,7 @@ internal class AzureSecrets : ISecrets
 
         if(string.IsNullOrWhiteSpace(name))
         {
-            throw new ArgumentNullException($"Parameter '{name}' is mandatory. It can not be empty of white space.",  nameof(name));
+            throw new ArgumentNullException($"Parameter '{name}' is mandatory. It can not be empty of white space.", nameof(name));
         }
 
         try
@@ -33,7 +34,7 @@ internal class AzureSecrets : ISecrets
 
             return secret.Value.Value;
         }
-        catch (RequestFailedException ex) when (ex.ErrorCode == "SecretNotFound")
+        catch(RequestFailedException ex) when(ex.ErrorCode == "SecretNotFound")
         {
             throw new SecretNotFoundException(name);
         }
@@ -50,7 +51,7 @@ internal class AzureSecrets : ISecrets
 
         if(string.IsNullOrWhiteSpace(name))
         {
-            throw new ArgumentNullException($"Parameter '{name}' is mandatory. It can not be empty of white space.",  nameof(name));
+            throw new ArgumentNullException($"Parameter '{name}' is mandatory. It can not be empty of white space.", nameof(name));
         }
 
         try
@@ -60,11 +61,11 @@ internal class AzureSecrets : ISecrets
 
             return secret.Value.Value;
         }
-        catch (RequestFailedException ex) when (ex.ErrorCode == "SecretNotFound")
+        catch(RequestFailedException ex) when(ex.ErrorCode == "SecretNotFound")
         {
             throw new SecretNotFoundException(name);
         }
-        catch (Exception ex)
+        catch(Exception ex)
         {
             logger.LogError(ex, $"Failed to execute {nameof(GetAsync)} with '{{@SecretName}}'.", name);
             throw new KeyVaultException($"Failed to retrieve secret with name '{name}'.", ex);
@@ -73,10 +74,21 @@ internal class AzureSecrets : ISecrets
 
     private static SecretClient CreateSecretClient(string keyVaultName)
     {
-        var uri = keyVaultName.ToLowerInvariant().StartsWith("https://")
-                ? new Uri(keyVaultName)
-                : new Uri($"https://{keyVaultName}.vault.azure.net");
-        
-        return new SecretClient(uri, new AzureCredentialBuilder().Build());
+        Uri uri = keyVaultName.ToLowerInvariant().StartsWith("https://")
+                          ? new Uri(keyVaultName)
+                          : new Uri($"https://{keyVaultName}.vault.azure.net");
+
+        return new SecretClient(uri,
+                                new AzureCredentialBuilder().Build(),
+                                new SecretClientOptions
+                                {
+                                    Retry =
+                                    {
+                                        MaxRetries = 3,
+                                        Mode = RetryMode.Exponential,
+                                        MaxDelay = TimeSpan.FromSeconds(30)
+                                    }
+                                }
+                               );
     }
 }

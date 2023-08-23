@@ -1,14 +1,15 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
     <AssemblyName>Peereflits.Shared.Cloud.KeyVault</AssemblyName>
     <RootNamespace>Peereflits.Shared.Cloud.KeyVault</RootNamespace>
+    <TargetFrameworks>netstandard2.1;net6.0;net7.0</TargetFrameworks>
   </PropertyGroup>
 
   <PropertyGroup>
     <ApplicationIcon>..\Solution Items\favicon.ico</ApplicationIcon>
     <IsPackable>true</IsPackable>
+    <LangVersion>latest</LangVersion>
     <Nullable>enable</Nullable>
     <OutputPath>bin\$(Configuration)\</OutputPath>
   </PropertyGroup>
@@ -22,15 +23,16 @@
 
   <PropertyGroup Label="Package">
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
-    <PackageIcon>PackageIcon.png</PackageIcon>
-    <PackageProjectUrl>https://github.com/peereflits/Shared.Cloud.KeyVault</PackageProjectUrl>
-    <RepositoryType>git</RepositoryType>
-    <RepositoryUrl>https://github.com/peereflits/Shared.Cloud.KeyVault</RepositoryUrl>
-    <Title>Peereflits.Shared.Cloud.KeyVault package</Title>
     <PackageDescription>
 Peereflits.Shared.Cloud.KeyVault is an implementation library for communicating with the Azure KeyVault.
 This is a component of Peereflits.Shared.
     </PackageDescription>
+    <PackageIcon>PackageIcon.png</PackageIcon>
+    <PackageProjectUrl>https://github.com/peereflits/Shared.Cloud.KeyVault</PackageProjectUrl>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <RepositoryType>git</RepositoryType>
+    <RepositoryUrl>https://github.com/peereflits/Shared.Cloud.KeyVault</RepositoryUrl>
+    <Title>Peereflits.Shared.Cloud.KeyVault package</Title>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -47,14 +49,15 @@ This is a component of Peereflits.Shared.
 
   <ItemGroup>
     <Folder Include="Properties\" />
-    <Content Include="..\Solution Items\PackageIcon.png" Link="Properties\PackageIcon.png" Pack="true" PackagePath="\" />
+    <None Include="..\Solution Items\PackageIcon.png" Link="Properties\PackageIcon.png" Pack="true" PackagePath="\" />
+    <None Include="..\..\README.md" Pack="true" PackagePath="\" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Azure.Identity" Version="1.8.0" />
-    <PackageReference Include="Azure.Security.KeyVault.Certificates" Version="4.4.0" />
-    <PackageReference Include="Azure.Security.KeyVault.Secrets" Version="4.4.0" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="6.0.1" />
+    <PackageReference Include="Azure.Identity" Version="1.9.0" />
+    <PackageReference Include="Azure.Security.KeyVault.Certificates" Version="4.5.1" />
+    <PackageReference Include="Azure.Security.KeyVault.Secrets" Version="4.5.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="7.0.1" />
   </ItemGroup>
 
   <ItemGroup>
