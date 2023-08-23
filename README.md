@@ -10,11 +10,11 @@ Azure KeyVault protects digital securables used by cloud apps and services. It p
 ](https://learn.microsoft.com/en-us/dotnet/api/overview/azure/key-vault?view=azure-dotnet) that allows reading secrets and managing certificates (read, add, delete). In addition, there are also "keys" (cryptographic RSA/EC keys); these are not supported in this library.
 
 The purpose of *Peereflits.Shared.Cloud.KeyVault* is:
-1. [Simplicity of usage](#Usage)
-1. [Management of authentication credentials](#Management%20of%20authentication%20credentials)
-1. Handling transient errors<br/>This is build into the classes `AzureCertificates` and `AzureSecrets`;
-1. Logging interaction with KeyVault<br/>See the `Factory` class and [usage](#Usage) below;
-1. Optimize performance<br/>See [Performance optimizations](#Performance%20optimizations)
+1. [Simplicity of usage](#usage)
+1. [Management of authentication credentials](#management-of-authentication-credentials)
+1. Handling transient errors<br/>This is build into the classes [AzureCertificates](./blob/main/src/KeyVault/AzureCertificates.cs) and [AzureSecrets](./blob/main/src/KeyVault/AzureSecrets.cs);
+1. Logging interaction with KeyVault<br/>See the [Factory class](./blob/main/src/KeyVault/Factory.cs) and [usage](#usage) below;
+1. Optimize performance<br/>See [Performance optimizations](#performance-optimizations)
 
 
 ## KeyVault packages, dependencies & class diagram
