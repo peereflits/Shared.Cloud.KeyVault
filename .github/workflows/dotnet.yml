@@ -43,4 +43,4 @@ jobs:
       run: |
         dotnet pack ${{ env.DOTNET_SOLUTION }} --configuration Release --no-build --no-restore
         dotnet nuget add source --username peereflits --password ${{ secrets.GITHUB_TOKEN }} --store-password-in-clear-text --name github "https://nuget.pkg.github.com/peereflits/index.json"
-        dotnet nuget push "*.nupkg" --skip-duplicate --source "github"
+        dotnet nuget push **/*.nupkg --skip-duplicate --source github
