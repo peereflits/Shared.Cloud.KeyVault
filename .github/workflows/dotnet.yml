@@ -3,7 +3,7 @@
 #                         Peereflits                                 #
 ######################################################################
 
-name: 'Build, test and deploy Shared.Cloud.KeyVault'
+name: 'Build, test and publish Peereflits.Shared.Cloud.KeyVault'
 
 on:
   push:

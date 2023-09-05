@@ -15,7 +15,7 @@
 
   <PropertyGroup Label="Package">
     <Version>1.0.1</Version>
-  </propertygroup>
+  </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugType>full</DebugType>
