@@ -113,6 +113,13 @@ The performance of the (http-)clients in the `Azure.Security.KeyVault` SDK is no
 The biggest performance hog is the usage of (an unconfigured) `DefaultAzureCredential` as it uses a fall-through policy by trying several credential types untill it succeeds.
 Due to the optimization in the `AzureCredentialBuilder` (see above) a performance benefit has been achieved.
 
+### Version support
+
+This library supports the following .NET versions:
+1. .NET 6.0
+1. .NET 7.0
+1. .NET 8.0
+
 ---
 
 <p align="center">
