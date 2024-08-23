@@ -1,6 +1,6 @@
 ﻿{
   "TestSettings": {
     "KeyVaultName": "my-key-vault-to-test",
-    "TenantId": "E2BEBA23-7B3B-4B1A-B7E9-DDB29B84A696"
+    "TenantId": "My Azure Tenant Id"
   }
 }

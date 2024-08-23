@@ -20,17 +20,17 @@ public class AzureSecretsTests
     [InlineData(default(string))]
     [InlineData("")]
     [InlineData("\r\n")]
-    public async Task WhenGetAsync_WithoutAName_ItShouldThrow(string name)
+    public async Task WhenGetAsync_WithoutAName_ItShouldThrow(string? name)
     {
-        await Assert.ThrowsAsync<ArgumentNullException>(() => subject.GetAsync(name));
+        await Assert.ThrowsAsync<ArgumentNullException>(() => subject.GetAsync(name ?? string.Empty));
     }
 
     [Theory]
     [InlineData(default(string))]
     [InlineData("")]
     [InlineData("\r\n")]
-    public void WhenGet_WithoutAName_ItShouldThrow(string name)
+    public void WhenGet_WithoutAName_ItShouldThrow(string? name)
     {
-        Assert.Throws<ArgumentNullException>(() => subject.Get(name));
+        Assert.Throws<ArgumentNullException>(() => subject.Get(name ?? string.Empty));
     }
 }

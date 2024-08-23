@@ -28,9 +28,9 @@ public class FactoryTests
     [InlineData("")]
     [InlineData(null)]
     [InlineData("\r\n")]
-    public void WhenCreateFactory_WithoutName_ItShouldThrow(string keyVaultName)
+    public void WhenCreateFactory_WithoutName_ItShouldThrow(string? keyVaultName)
     {
-        var ex = Assert.Throws<ArgumentNullException>(() => Factory.CreateFactory(keyVaultName, NullLoggerFactory.Instance));
+        var ex = Assert.Throws<ArgumentNullException>(() => Factory.CreateFactory(keyVaultName ?? string.Empty, NullLoggerFactory.Instance));
         Assert.Equal("keyVaultName", ex.ParamName);
     }
 

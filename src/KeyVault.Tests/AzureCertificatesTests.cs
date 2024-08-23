@@ -19,17 +19,17 @@ public class AzureCertificatesTests
     [Theory]
     [InlineData(null)]
     [InlineData("")]
-    public async Task WhenGet_WithoutAName_ItShouldThrow(string name)
+    public async Task WhenGet_WithoutAName_ItShouldThrow(string? name)
     {
-        await Assert.ThrowsAsync<ArgumentNullException>(() => subject.Get(name));
+        await Assert.ThrowsAsync<ArgumentNullException>(() => subject.Get(name ?? string.Empty));
     }
 
     [Theory]
     [InlineData(null)]
     [InlineData("")]
-    public async Task WhenGetWithPrivateKey_WithoutAName_ItShouldThrow(string name)
+    public async Task WhenGetWithPrivateKey_WithoutAName_ItShouldThrow(string? name)
     {
-        await Assert.ThrowsAsync<ArgumentNullException>(() => subject.GetWithPrivateKey(name));
+        await Assert.ThrowsAsync<ArgumentNullException>(() => subject.GetWithPrivateKey(name ?? string.Empty));
     }
 
     [Fact]
@@ -48,8 +48,8 @@ public class AzureCertificatesTests
     [InlineData(null)]
     [InlineData("")]
     [InlineData(" ")]
-    public async Task WhenDeletingWithoutAName_ItShouldThrow(string name)
+    public async Task WhenDeletingWithoutAName_ItShouldThrow(string? name)
     {
-        await Assert.ThrowsAsync<ArgumentNullException>(() => subject.Delete(name));
+        await Assert.ThrowsAsync<ArgumentNullException>(() => subject.Delete(name ?? string.Empty));
     }
 }
