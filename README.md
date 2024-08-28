@@ -1,4 +1,4 @@
-![Logo](./img/peereflits-logo.png) 
+![Logo](./img/peereflits-logo.svg) 
 
 # Peereflits.Shared.Cloud.KeyVault
 
@@ -10,11 +10,14 @@ Azure KeyVault protects digital securables used by cloud apps and services. It p
 ](https://learn.microsoft.com/en-us/dotnet/api/overview/azure/key-vault?view=azure-dotnet) that allows reading secrets and managing certificates (read, add, delete). In addition, there are also "keys" (cryptographic RSA/EC keys); these are not supported in this library.
 
 The purpose of *Peereflits.Shared.Cloud.KeyVault* is:
-1. [Simplicity of usage](#usage)
-1. [Management of authentication credentials](#management-of-authentication-credentials)
-1. Handling transient errors<br/>This is build into the classes [AzureCertificates](./blob/main/src/KeyVault/AzureCertificates.cs) and [AzureSecrets](./blob/main/src/KeyVault/AzureSecrets.cs);
-1. Logging interaction with KeyVault<br/>See the [Factory class](./blob/main/src/KeyVault/Factory.cs) and [usage](#usage) below;
-1. Optimize performance<br/>See [Performance optimizations](#performance-optimizations)
+- [Peereflits.Shared.Cloud.KeyVault](#peereflitssharedcloudkeyvault)
+  - [KeyVault packages, dependencies \& class diagram](#keyvault-packages-dependencies--class-diagram)
+  - [Usage](#usage)
+    - [Usage in DI enabled scenarios](#usage-in-di-enabled-scenarios)
+    - [Usage in DI disabled scenarios](#usage-in-di-disabled-scenarios)
+  - [Management of authentication credentials](#management-of-authentication-credentials)
+  - [Performance optimizations](#performance-optimizations)
+    - [Version support](#version-support)
 
 
 ## KeyVault packages, dependencies & class diagram

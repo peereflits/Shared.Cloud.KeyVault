@@ -21,6 +21,7 @@ Peereflits.Shared.Cloud.KeyVault is an implementation library for communicating 
 This is a component of Peereflits.Shared.
     </PackageDescription>
     <PackageIcon>PackageIcon.png</PackageIcon>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/peereflits/Shared.Cloud.KeyVault</PackageProjectUrl>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <RepositoryType>git</RepositoryType>
