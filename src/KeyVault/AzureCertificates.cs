@@ -39,9 +39,7 @@ internal class AzureCertificates : ICertificates
         try
         {
             Response<KeyVaultCertificateWithPolicy> policy = await certificateClient.GetCertificateAsync(name);
-
-            var result = new X509Certificate2(policy.Value.Cer);
-
+            var result = GetCertificate(policy.Value.Cer);
             logger.LogInformation($"Executed {nameof(Get)} with '{{@CertificateName}}'.", name);
 
             return result;
@@ -71,9 +69,7 @@ internal class AzureCertificates : ICertificates
             string cert = await secrets.GetAsync(name);
             byte[] arr = Convert.FromBase64String(cert);
 
-            X509Certificate2 result = string.IsNullOrWhiteSpace(password)
-                                              ? new X509Certificate2(arr)
-                                              : new X509Certificate2(arr, password);
+            X509Certificate2 result = GetCertificate(arr, password);
 
             logger.LogInformation($"Executed {nameof(GetWithPrivateKey)} with '{{@CertificateName}}'.", name);
 
@@ -88,6 +84,20 @@ internal class AzureCertificates : ICertificates
             logger.LogError(ex, $"Failed to execute {nameof(GetWithPrivateKey)} with '{{@CertificateName}}'.", name);
             throw new KeyVaultException($"Failed to retrieve certificate with name '{name}'.", ex);
         }
+    }
+
+    private static X509Certificate2 GetCertificate(byte[] certificate, string? password = null)
+    {
+#if NET9_0_OR_GREATER
+        var result = X509Certificate2.GetCertContentType(certificate) == X509ContentType.Pfx
+                     ? X509CertificateLoader.LoadPkcs12(certificate, password)
+                     : X509CertificateLoader.LoadCertificate(certificate);
+#else
+        var result = string.IsNullOrWhiteSpace(password)
+                  ? new X509Certificate2(certificate)
+                  : new X509Certificate2(certificate, password);
+#endif
+        return result;
     }
 
     public async Task Install(string name, string passPhrase, byte[] certificate)

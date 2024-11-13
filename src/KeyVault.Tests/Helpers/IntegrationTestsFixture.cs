@@ -16,7 +16,12 @@ public class IntegrationTestsFixture : IDisposable
         Environment.SetEnvironmentVariable("TENANT_ID", Settings.TenantId);
 
         TestCertificateContent = CreateTestCertificate();
+
+#if NET9_0_OR_GREATER
+        Expected = X509CertificateLoader.LoadPkcs12(TestCertificateContent, TestPassPhrase);
+#else
         Expected = new X509Certificate2(TestCertificateContent, TestPassPhrase);
+#endif
     }
 
     private static TestSettings GetTestSettings()
